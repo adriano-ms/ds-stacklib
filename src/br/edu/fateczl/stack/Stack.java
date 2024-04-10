@@ -1,6 +1,8 @@
 package br.edu.fateczl.stack;
 
-public class Stack<T> {
+import java.util.Iterator;
+
+public class Stack<T> implements Iterable<T> {
 
 	private Node<T> top;
 
@@ -47,4 +49,35 @@ public class Stack<T> {
 	public Boolean isEmpty() {
 		return top == null;
 	}
+	
+	Node<T> getFirst() {
+		return top;
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new StackIterator<T>(this);
+	}
+}
+
+class StackIterator<T> implements Iterator<T> {
+	
+	private Node<T> current;
+	
+	public StackIterator(Stack<T> stack) {
+		this.current = stack.getFirst();
+	}
+
+	@Override
+	public boolean hasNext() {
+		return current != null;
+	}
+
+	@Override
+	public T next() {
+		T data = current.getData();
+		current = current.getNext();
+		return data;
+	}
+
 }
