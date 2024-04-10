@@ -1,30 +1,30 @@
 package br.edu.fateczl.stack;
 
-public class IntStack {
+public class Stack<T> {
 
-	private IntNode top;
+	private Node<T> top;
 
-	public IntStack() {
+	public Stack() {
 		super();
 	}
 
-	public void push(Integer e) {
-		IntNode newNode = new IntNode();
-		newNode.setData(e);
+	public void push(T data) {
+		Node<T> newNode = new Node<>();
+		newNode.setData(data);
 		newNode.setNext(top);
 		this.top = newNode;
 	}
 
-	public Integer pop() throws Exception {
+	public T pop() throws Exception {
 		if (isEmpty()) {
 			throw new Exception("Empty Stack");
 		}
-		Integer toReturn = top.getData();
+		T toReturn = top.getData();
 		top = top.getNext();
 		return toReturn;
 	}
 
-	public Integer top() throws Exception {
+	public T top() throws Exception {
 		if (isEmpty()) {
 			throw new Exception("Empty Stack");
 		}
@@ -35,7 +35,7 @@ public class IntStack {
 		if (isEmpty()) {
 			return 0;
 		}
-		IntNode aux = top;
+		Node<T> aux = top;
 		int count = 1;
 		while (aux.getNext() != null) {
 			count++;
